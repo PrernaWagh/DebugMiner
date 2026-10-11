@@ -1,0 +1,218 @@
+support,itemsets,length
+0.039944078290393446,Fault=MFC,1
+0.010385460355502297,Fault=MFCT,1
+0.011184341921310166,Fault=MIA,1
+0.019372877970840825,Fault=MIES,1
+0.1012582384661474,Fault=MIFS,1
+0.015578190533253445,Fault=MLAC,1
+0.029358897543439184,Fault=MLPL,1
+0.016377072099061314,Fault=MLPS,1
+0.10764929099261035,Fault=MPFC,1
+0.011583782704214101,Fault=MVAE,1
+0.02176952266826443,Fault=MVAV,1
+0.025564210105851807,Fault=WALD,1
+0.07948871579788297,Fault=WALL,1
+0.025164769322947873,Fault=WALR,1
+0.06670661074495705,Fault=WFCD,1
+0.05592170960655083,Fault=WFCS,1
+0.04154184142200919,Fault=WLEC,1
+0.02017175953664869,Fault=WPFL,1
+0.01018573996405033,Fault=WPFO,1
+0.0579189135210705,Fault=WPFV,1
+0.05132814060315558,Fault=WSUIT,1
+0.035350509286998205,Fault=WVAV,1
+0.017775114839225083,Fault=WVIV,1
+0.0828839624525664,Project=airflow,1
+0.08508088675853805,Project=ansible,1
+0.016377072099061314,Project=black,1
+0.17155981625723987,Project=cpython,1
+0.14679448771719592,Project=django,1
+0.019772318753744758,Project=numpy,1
+0.014379868184541641,Project=openstack,1
+0.3141601757539445,Project=pandas,1
+0.07649290992610346,Project=scikit-learn,1
+0.010585180746954264,Project=scrapy,1
+0.13381266227281804,PythonVersion=2.7,1
+0.10445376472937887,PythonVersion=3.0,1
+0.050928699820251645,PythonVersion=3.3,1
+0.0695026962252846,PythonVersion=3.4,1
+0.059516676652686236,PythonVersion=3.5,1
+0.11743559017375674,PythonVersion=3.6,1
+0.09306970241661673,PythonVersion=3.7,1
+0.07649290992610346,PythonVersion=3.8,1
+0.2832035150788896,PythonVersion=3.9,1
+0.0469342919912123,Source=BugsInPy,1
+0.8370281605751947,Source=Defectors,1
+0.01957259836229279,Source=MoreFixes,1
+0.04074295985620132,Source=PySecDB,1
+0.016776512881965248,Source=PyTraceBugs,1
+0.010984621529858199,Source=nbfbaseline,1
+0.014180147793089674,"Fault=MFC, Project=pandas",2
+0.012582384661473937,"Fault=MFC, PythonVersion=3.9",2
+0.03515078889554624,"Fault=MFC, Source=Defectors",2
+0.016976233273417216,"Fault=MIES, Source=Defectors",2
+0.019173157579388856,"Fault=MIFS, Project=cpython",2
+0.01517874975034951,"Fault=MIFS, Project=django",2
+0.031356101457958856,"Fault=MIFS, Project=pandas",2
+0.011983223487118035,"Fault=MIFS, PythonVersion=2.7",2
+0.013381266227281806,"Fault=MIFS, PythonVersion=3.0",2
+0.016377072099061314,"Fault=MIFS, PythonVersion=3.6",2
+0.02596365088875574,"Fault=MIFS, PythonVersion=3.9",2
+0.08707809067305772,"Fault=MIFS, Source=Defectors",2
+0.011583782704214101,"Fault=MLAC, Source=Defectors",2
+0.02156980227681246,"Fault=MLPL, Source=Defectors",2
+0.011983223487118035,"Fault=MLPS, Source=Defectors",2
+0.013381266227281806,"Fault=MPFC, Project=cpython",2
+0.046335130816856404,"Fault=MPFC, Project=pandas",2
+0.01078490113840623,"Fault=MPFC, PythonVersion=2.7",2
+0.015378470141801479,"Fault=MPFC, PythonVersion=3.0",2
+0.015378470141801479,"Fault=MPFC, PythonVersion=3.6",2
+0.012582384661473937,"Fault=MPFC, PythonVersion=3.7",2
+0.024965048931495905,"Fault=MPFC, PythonVersion=3.9",2
+0.09466746554823248,"Fault=MPFC, Source=Defectors",2
+0.02037147992810066,"Fault=MVAV, Source=Defectors",2
+0.020770920711004594,"Fault=WALD, Source=Defectors",2
+0.01757539444777312,"Fault=WALL, Project=cpython",2
+0.011384062312762133,"Fault=WALL, Project=django",2
+0.027161973237467545,"Fault=WALL, Project=pandas",2
+0.01298182544437787,"Fault=WALL, PythonVersion=2.7",2
+0.026562812063111643,"Fault=WALL, PythonVersion=3.9",2
+0.07149990013980427,"Fault=WALL, Source=Defectors",2
+0.020770920711004594,"Fault=WALR, Source=Defectors",2
+0.010585180746954264,"Fault=WFCD, Project=cpython",2
+0.01238266427002197,"Fault=WFCD, Project=django",2
+0.018573996405032954,"Fault=WFCD, Project=pandas",2
+0.012182943878570001,"Fault=WFCD, PythonVersion=2.7",2
+0.018573996405032954,"Fault=WFCD, PythonVersion=3.9",2
+0.057519472738166565,"Fault=WFCD, Source=Defectors",2
+0.010984621529858199,"Fault=WFCS, Project=cpython",2
+0.017175953664869185,"Fault=WFCS, Project=pandas",2
+0.015777910924705412,"Fault=WFCS, PythonVersion=3.9",2
+0.046734571599760334,"Fault=WFCS, Source=Defectors",2
+0.011583782704214101,"Fault=WLEC, Project=pandas",2
+0.01078490113840623,"Fault=WLEC, PythonVersion=3.9",2
+0.03035749950069902,"Fault=WLEC, Source=Defectors",2
+0.016976233273417216,"Fault=WPFL, Source=Defectors",2
+0.018973437187936888,"Fault=WPFV, Project=pandas",2
+0.018573996405032954,"Fault=WPFV, PythonVersion=3.9",2
+0.048931495905731974,"Fault=WPFV, Source=Defectors",2
+0.013580986618733772,"Fault=WSUIT, Project=cpython",2
+0.014379868184541641,"Fault=WSUIT, Project=pandas",2
+0.018973437187936888,"Fault=WSUIT, PythonVersion=3.9",2
+0.043938486119432796,"Fault=WSUIT, Source=Defectors",2
+0.010585180746954264,"Fault=WVAV, Project=pandas",2
+0.02915917715198722,"Fault=WVAV, Source=Defectors",2
+0.011783503095666068,"Fault=WVIV, Source=Defectors",2
+0.011783503095666068,"Project=airflow, PythonVersion=2.7",2
+0.033153584981026565,"Project=airflow, PythonVersion=3.7",2
+0.0237667265827841,"Project=airflow, PythonVersion=3.9",2
+0.07968843618933494,"Project=airflow, Source=Defectors",2
+0.0689035350509287,"Project=ansible, PythonVersion=2.7",2
+0.07908927501497903,"Project=ansible, Source=Defectors",2
+0.014779308967445576,"Project=black, PythonVersion=3.6",2
+0.014779308967445576,"Project=black, Source=Defectors",2
+0.03654883163571001,"Project=cpython, PythonVersion=3.6",2
+0.13441182344717395,"Project=cpython, PythonVersion=3.9",2
+0.16137407629318953,"Project=cpython, Source=Defectors",2
+0.02017175953664869,"Project=django, PythonVersion=2.7",2
+0.025763930497303775,"Project=django, PythonVersion=3.0",2
+0.021170361493908527,"Project=django, PythonVersion=3.3",2
+0.01817455562212902,"Project=django, PythonVersion=3.4",2
+0.01957259836229279,"Project=django, PythonVersion=3.5",2
+0.011384062312762133,"Project=django, PythonVersion=3.6",2
+0.02037147992810066,"Project=django, PythonVersion=3.9",2
+0.12083083682844019,"Project=django, Source=Defectors",2
+0.019772318753744758,"Project=django, Source=PySecDB",2
+0.014379868184541641,"Project=numpy, Source=Defectors",2
+0.01018573996405033,"Project=openstack, PythonVersion=3.9",2
+0.01957259836229279,"Project=pandas, PythonVersion=2.7",2
+0.07169962053125624,"Project=pandas, PythonVersion=3.0",2
+0.02756141402037148,"Project=pandas, PythonVersion=3.3",2
+0.03175554224086279,"Project=pandas, PythonVersion=3.4",2
+0.0225684042340723,"Project=pandas, PythonVersion=3.5",2
+0.03215498302376673,"Project=pandas, PythonVersion=3.6",2
+0.031356101457958856,"Project=pandas, PythonVersion=3.7",2
+0.04254044337926902,"Project=pandas, PythonVersion=3.8",2
+0.03495106850409427,"Project=pandas, PythonVersion=3.9",2
+0.017775114839225083,"Project=pandas, Source=BugsInPy",2
+0.28260435390453365,"Project=pandas, Source=Defectors",2
+0.011583782704214101,"Project=pandas, Source=PyTraceBugs",2
+0.011583782704214101,"Project=scikit-learn, PythonVersion=3.4",2
+0.01018573996405033,"Project=scikit-learn, PythonVersion=3.5",2
+0.03215498302376673,"Project=scikit-learn, PythonVersion=3.9",2
+0.07289794287996805,"Project=scikit-learn, Source=Defectors",2
+0.12103055721989216,"PythonVersion=2.7, Source=Defectors",2
+0.09107249850209706,"PythonVersion=3.0, Source=Defectors",2
+0.0475334531655682,"PythonVersion=3.3, Source=Defectors",2
+0.06211304174156181,"PythonVersion=3.4, Source=Defectors",2
+0.04593569003395247,"PythonVersion=3.5, Source=Defectors",2
+0.09446774515678051,"PythonVersion=3.6, Source=Defectors",2
+0.079288995406431,"PythonVersion=3.7, Source=Defectors",2
+0.0341521869382864,"PythonVersion=3.8, Source=BugsInPy",2
+0.03854603555022968,"PythonVersion=3.8, Source=Defectors",2
+0.24825244657479528,"PythonVersion=3.9, Source=Defectors",2
+0.013181545835829839,"Fault=MFC, Project=pandas, Source=Defectors",3
+0.01238266427002197,"Fault=MFC, PythonVersion=3.9, Source=Defectors",3
+0.014979029358897543,"Fault=MIFS, Project=cpython, PythonVersion=3.9",3
+0.018773716796484922,"Fault=MIFS, Project=cpython, Source=Defectors",3
+0.013181545835829839,"Fault=MIFS, Project=django, Source=Defectors",3
+0.027960854803275415,"Fault=MIFS, Project=pandas, Source=Defectors",3
+0.010585180746954264,"Fault=MIFS, PythonVersion=2.7, Source=Defectors",3
+0.011583782704214101,"Fault=MIFS, PythonVersion=3.0, Source=Defectors",3
+0.01378070701018574,"Fault=MIFS, PythonVersion=3.6, Source=Defectors",3
+0.02396644697423607,"Fault=MIFS, PythonVersion=3.9, Source=Defectors",3
+0.011184341921310166,"Fault=MPFC, Project=cpython, Source=Defectors",3
+0.01298182544437787,"Fault=MPFC, Project=pandas, PythonVersion=3.0",3
+0.04373876572798083,"Fault=MPFC, Project=pandas, Source=Defectors",3
+0.01078490113840623,"Fault=MPFC, PythonVersion=2.7, Source=Defectors",3
+0.01457958857599361,"Fault=MPFC, PythonVersion=3.0, Source=Defectors",3
+0.013181545835829839,"Fault=MPFC, PythonVersion=3.6, Source=Defectors",3
+0.011583782704214101,"Fault=MPFC, PythonVersion=3.7, Source=Defectors",3
+0.020970641102456562,"Fault=MPFC, PythonVersion=3.9, Source=Defectors",3
+0.01457958857599361,"Fault=WALL, Project=cpython, PythonVersion=3.9",3
+0.017175953664869185,"Fault=WALL, Project=cpython, Source=Defectors",3
+0.025763930497303775,"Fault=WALL, Project=pandas, Source=Defectors",3
+0.012582384661473937,"Fault=WALL, PythonVersion=2.7, Source=Defectors",3
+0.02476532854004394,"Fault=WALL, PythonVersion=3.9, Source=Defectors",3
+0.010385460355502297,"Fault=WFCD, Project=cpython, Source=Defectors",3
+0.01757539444777312,"Fault=WFCD, Project=pandas, Source=Defectors",3
+0.011184341921310166,"Fault=WFCD, PythonVersion=2.7, Source=Defectors",3
+0.016576792490513283,"Fault=WFCD, PythonVersion=3.9, Source=Defectors",3
+0.010984621529858199,"Fault=WFCS, Project=cpython, Source=Defectors",3
+0.01517874975034951,"Fault=WFCS, Project=pandas, Source=Defectors",3
+0.014779308967445576,"Fault=WFCS, PythonVersion=3.9, Source=Defectors",3
+0.01737567405632115,"Fault=WPFV, Project=pandas, Source=Defectors",3
+0.015378470141801479,"Fault=WPFV, PythonVersion=3.9, Source=Defectors",3
+0.01238266427002197,"Fault=WSUIT, Project=cpython, PythonVersion=3.9",3
+0.013580986618733772,"Fault=WSUIT, Project=cpython, Source=Defectors",3
+0.013580986618733772,"Fault=WSUIT, Project=pandas, Source=Defectors",3
+0.01757539444777312,"Fault=WSUIT, PythonVersion=3.9, Source=Defectors",3
+0.011783503095666068,"Project=airflow, PythonVersion=2.7, Source=Defectors",3
+0.0329538645895746,"Project=airflow, PythonVersion=3.7, Source=Defectors",3
+0.022768124625524265,"Project=airflow, PythonVersion=3.9, Source=Defectors",3
+0.06670661074495705,"Project=ansible, PythonVersion=2.7, Source=Defectors",3
+0.014779308967445576,"Project=black, PythonVersion=3.6, Source=Defectors",3
+0.030956660675054922,"Project=cpython, PythonVersion=3.6, Source=Defectors",3
+0.13021769522668264,"Project=cpython, PythonVersion=3.9, Source=Defectors",3
+0.01817455562212902,"Project=django, PythonVersion=2.7, Source=Defectors",3
+0.018773716796484922,"Project=django, PythonVersion=3.0, Source=Defectors",3
+0.018773716796484922,"Project=django, PythonVersion=3.3, Source=Defectors",3
+0.014379868184541641,"Project=django, PythonVersion=3.4, Source=Defectors",3
+0.01457958857599361,"Project=django, PythonVersion=3.5, Source=Defectors",3
+0.019972039145196723,"Project=django, PythonVersion=3.9, Source=Defectors",3
+0.017974835230677052,"Project=pandas, PythonVersion=2.7, Source=Defectors",3
+0.06750549231076493,"Project=pandas, PythonVersion=3.0, Source=Defectors",3
+0.027161973237467545,"Project=pandas, PythonVersion=3.3, Source=Defectors",3
+0.03035749950069902,"Project=pandas, PythonVersion=3.4, Source=Defectors",3
+0.019173157579388856,"Project=pandas, PythonVersion=3.5, Source=Defectors",3
+0.030157779109247055,"Project=pandas, PythonVersion=3.6, Source=Defectors",3
+0.030756940283602957,"Project=pandas, PythonVersion=3.7, Source=Defectors",3
+0.017775114839225083,"Project=pandas, PythonVersion=3.8, Source=BugsInPy",3
+0.02476532854004394,"Project=pandas, PythonVersion=3.8, Source=Defectors",3
+0.0347513481126423,"Project=pandas, PythonVersion=3.9, Source=Defectors",3
+0.010385460355502297,"Project=scikit-learn, PythonVersion=3.4, Source=Defectors",3
+0.031356101457958856,"Project=scikit-learn, PythonVersion=3.9, Source=Defectors",3
+0.014979029358897543,"Fault=MIFS, Project=cpython, PythonVersion=3.9, Source=Defectors",4
+0.012582384661473937,"Fault=MPFC, Project=pandas, PythonVersion=3.0, Source=Defectors",4
+0.014379868184541641,"Fault=WALL, Project=cpython, PythonVersion=3.9, Source=Defectors",4
+0.01238266427002197,"Fault=WSUIT, Project=cpython, PythonVersion=3.9, Source=Defectors",4

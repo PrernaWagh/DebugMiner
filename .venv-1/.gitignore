@@ -1,0 +1,11 @@
+@"
+.venv/
+.venv-1/
+__pycache__/
+*.pyc
+*.pyo
+*.csv
+*.xlsx
+.streamlit/
+*.log
+"@ | Out-File -FilePath ".gitignore" -Encoding utf8
