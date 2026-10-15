@@ -368,8 +368,6 @@ elif page == "Code Analyzer":
             st.code(guidance["example"], language="python")
             st.caption("Guidance is general — verify the fix and test your code.")
 
-
-
 # -------------------------------------------------------
 # PAGE: INPUT BUILDER
 # -------------------------------------------------------
@@ -444,7 +442,6 @@ elif page == "Input Builder":
                       if c in df.columns])
         else:
             st.error("Dataset file not found.")
-
 
 # -------------------------------------------------------
 # PAGE: APRIORI MINING
