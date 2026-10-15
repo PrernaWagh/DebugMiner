@@ -1,3 +1,4 @@
+
 """DebugMiner: Apriori-based frequent pattern mining for software bug records."""
 from pathlib import Path
 
@@ -9,7 +10,6 @@ from apriori_engine import (
     run_apriori, compare_algorithms, transactions_from_dataframe, format_itemset,
 )
 from error_analyzer import identify_error, get_guidance, build_transaction_from_error
-from bug_search import BugSearch
 
 
 # -------------------------------------------------------
@@ -267,7 +267,6 @@ with st.sidebar:
         "Apriori Mining",
         "Rule Explorer",
         "Threshold Analyzer",
-        "Historical Bug Search",
         "Algorithm Comparison",
         "Dataset Statistics",
     ])
@@ -285,70 +284,39 @@ with st.sidebar:
 # PAGE: OVERVIEW
 # -------------------------------------------------------
 if page == "Overview":
-    st.markdown(
-        '<div class="hero-title">Mine the bugs.<br>Find the patterns.</div>'
-        '<div class="hero-description">'
-        'DebugMiner applies the <b>Apriori algorithm</b> to software bug records. '
-        'Each bug becomes a transaction, each categorical field-value pair becomes '
-        'an item, and recurring combinations are surfaced as <b>association rules</b> '
-        'ranked by support, confidence and lift.'
-        '</div>',
-        unsafe_allow_html=True,
-    )
+    st.title("DebugMiner")
+    st.caption("Software bug pattern mining using association rules")
 
     path = find_dataset()
     if path:
         df = load_dataset(path, Path(path).stat().st_mtime)
-        a, b, c = st.columns(3)
-        with a:
-            st.markdown(f'<div class="metric-card">'
-                        f'<div class="mini-label">Bug records</div>'
-                        f'<div class="metric-value">{len(df):,}</div>'
-                        f'<div class="metric-note">Rows available for mining</div>'
-                        f'</div>', unsafe_allow_html=True)
-        with b:
-            st.markdown(f'<div class="metric-card">'
-                        f'<div class="mini-label">Dataset fields</div>'
-                        f'<div class="metric-value">{len(df.columns)}</div>'
-                        f'<div class="metric-note">Attributes per bug</div>'
-                        f'</div>', unsafe_allow_html=True)
-        with c:
-            st.markdown('<div class="metric-card">'
-                        '<div class="mini-label">Core algorithm</div>'
-                        '<div class="metric-value">Apriori</div>'
-                        '<div class="metric-note">From-scratch implementation</div>'
-                        '</div>', unsafe_allow_html=True)
-        st.caption(f"Loaded from {path}.")
+        transactions = transactions_from_dataframe(df)
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("Bug records", f"{len(df):,}")
+        c2.metric("Dataset fields", f"{len(df.columns):,}")
+        c3.metric("Transactions", f"{len(transactions):,}")
+        c4.metric("Mining algorithm", "Apriori")
+        st.caption(f"Dataset file: {path}")
+    else:
+        st.warning("Dataset not found. Place PyresBugs.xlsx or PyresBugs.csv beside app.py.")
 
-    st.markdown("### What makes DebugMiner different")
-    x, y, z = st.columns(3)
-    with x:
-        st.markdown(
-            '<div class="feature-card">'
-            '<div class="feature-title">From-scratch Apriori</div>'
-            '<div class="feature-description">'
-            'Candidate generation, support counting and pruning implemented '
-            'manually, not through a library call.'
-            '</div></div>', unsafe_allow_html=True)
-    with y:
-        st.markdown(
-            '<div class="feature-card">'
-            '<div class="feature-title">Interactive thresholds</div>'
-            '<div class="feature-description">'
-            'Support, confidence, lift and maximum itemset size are adjustable '
-            'with live impact analysis.'
-            '</div></div>', unsafe_allow_html=True)
-    with z:
-        st.markdown(
-            '<div class="feature-card">'
-            '<div class="feature-title">Error-to-transaction</div>'
-            '<div class="feature-description">'
-            'Paste a Python traceback and convert it directly into an Apriori '
-            'transaction for pattern matching.'
-            '</div></div>', unsafe_allow_html=True)
+    st.subheader("Workflow")
+    w1, w2, w3, w4 = st.columns(4)
+    w1.markdown("**1. Prepare data**\n\nConvert each bug record into a transaction.")
+    w2.markdown("**2. Mine itemsets**\n\nGenerate candidates and prune infrequent combinations.")
+    w3.markdown("**3. Generate rules**\n\nEvaluate rules using support, confidence and lift.")
+    w4.markdown("**4. Review results**\n\nExplore frequent patterns and compare implementations.")
 
-    st.info("Association rules reveal co-occurrence, not causation.")
-
+    st.subheader("Project modules")
+    st.dataframe(pd.DataFrame([
+        {"Module": "Input Builder", "Purpose": "Convert a traceback or manual input into a transaction."},
+        {"Module": "Apriori Mining", "Purpose": "Discover frequent itemsets from the selected transaction source."},
+        {"Module": "Rule Explorer", "Purpose": "Inspect association rules and their metrics."},
+        {"Module": "Threshold Analyzer", "Purpose": "Observe how minimum support changes the number of rules."},
+        {"Module": "Algorithm Comparison", "Purpose": "Compare manual Apriori with the library Apriori implementation."},
+        {"Module": "Dataset Statistics", "Purpose": "Inspect dataset size, fields, missing values and category counts."},
+    ]), width="stretch", hide_index=True)
+    st.caption("Association rules show co-occurrence; they do not establish causation.")
 
 # -------------------------------------------------------
 # PAGE: CODE ANALYZER  (kept — bug guidance + related records)
@@ -372,7 +340,7 @@ elif page == "Code Analyzer":
             placeholder="KeyError: 'age'", key="analyzer_error",
         )
         analyze = st.button("Analyze and find historical fixes",
-                            type="primary", use_container_width=True)
+                            type="primary", width="stretch")
 
     with right:
         st.markdown("#### How it works")
@@ -400,42 +368,6 @@ elif page == "Code Analyzer":
             st.code(guidance["example"], language="python")
             st.caption("Guidance is general — verify the fix and test your code.")
 
-            st.markdown("### Related historical fixes")
-            path = find_dataset()
-            if not path:
-                st.warning("Historical dataset not found.")
-            else:
-                try:
-                    df = load_dataset(path, Path(path).stat().st_mtime)
-                    engine = BugSearch(df)
-                    query = f"{error_type} {error_text}\n{code[:2000]}"
-                    with st.spinner("Searching historical records..."):
-                        results = engine.search(query, top_k=5)
-
-                    if results.empty:
-                        st.warning("No textually similar historical records found.")
-                    else:
-                        st.markdown(
-                            f'<div class="status-good">✓ {len(results)} related record(s)</div>',
-                            unsafe_allow_html=True,
-                        )
-                        for i, (_, row) in enumerate(results.iterrows(), 1):
-                            title = str(row.get("Bug_Description", f"Match {i}"))[:140]
-                            with st.expander(f"#{i:02d} · {title}", expanded=(i == 1)):
-                                st.markdown("**Fault type**")
-                                st.write(row.get("Fault_Acronym", "—"))
-                                st.markdown("**Project**")
-                                st.write(row.get("Project", "—"))
-                                st.markdown("**Python version**")
-                                st.write(row.get("Python_Version", "—"))
-                                score = row.get("similarity_score")
-                                if score is not None:
-                                    st.metric("Text similarity", f"{float(score):.1%}")
-                                url = row.get("Url")
-                                if url and str(url).strip() not in ("", "nan"):
-                                    st.markdown(f"[↗ View repository]({url})")
-                except Exception as exc:
-                    st.error(f"Could not retrieve historical examples: {exc}")
 
 
 # -------------------------------------------------------
@@ -505,7 +437,7 @@ elif page == "Input Builder":
         if path:
             df = load_dataset(path, Path(path).stat().st_mtime)
             st.success(f"Loaded {len(df):,} records and {len(df.columns)} columns.")
-            st.dataframe(df.head(10), use_container_width=True)
+            st.dataframe(df.head(10), width="stretch")
             st.write("Mining fields used:",
                      [c for c in ["Fault_Acronym", "Project",
                                   "Dataset_input", "Python_Version"]
@@ -574,14 +506,14 @@ elif page == "Apriori Mining":
 
         st.markdown("### Frequent itemsets")
         item_display = readable_itemsets(itemsets)
-        st.dataframe(item_display, use_container_width=True, hide_index=True)
+        st.dataframe(item_display, width="stretch", hide_index=True)
         if not item_display.empty:
             top = item_display.sort_values("support", ascending=False).head(15)
             fig = px.bar(top, x="support", y="itemsets", orientation="h",
                          color="support", title="Top 15 frequent itemsets",
                          labels={"support": "Support", "itemsets": "Itemset"})
             fig.update_layout(yaxis={"autorange": "reversed"})
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
             st.download_button(
                 "Download frequent itemsets CSV",
                 item_display.to_csv(index=False).encode("utf-8"),
@@ -598,12 +530,12 @@ elif page == "Apriori Mining":
                 ["lift", "confidence"], ascending=False)
             st.dataframe(
                 rule_display.round({"support": 4, "confidence": 4, "lift": 4}),
-                use_container_width=True, hide_index=True,
+                width="stretch", hide_index=True,
             )
             fig = px.scatter(rule_display, x="support", y="confidence",
                              color="lift", hover_data=["antecedents", "consequents"],
                              title="Support vs confidence (color = lift)")
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
             st.download_button(
                 "Download association rules CSV",
                 rule_display.to_csv(index=False).encode("utf-8"),
@@ -642,7 +574,7 @@ elif page == "Rule Explorer":
         st.write(f"{len(display)} matching rules")
         st.dataframe(
             display.round({"support": 4, "confidence": 4, "lift": 4}),
-            use_container_width=True, hide_index=True,
+            width="stretch", hide_index=True,
         )
 
         if not display.empty:
@@ -701,60 +633,21 @@ elif page == "Threshold Analyzer":
                              "Runtime (ms)": stats["time_ms"]})
                 bar.progress((i + 1) / len(support_values))
             result = pd.DataFrame(rows)
-            st.dataframe(result, use_container_width=True, hide_index=True)
+            st.dataframe(result, width="stretch", hide_index=True)
             st.plotly_chart(
                 px.line(result, x="Minimum support", y="Frequent itemsets",
                         markers=True,
                         title="Support threshold vs frequent itemsets"),
-                use_container_width=True)
+                width="stretch")
             st.plotly_chart(
                 px.line(result, x="Minimum support", y="Rules", markers=True,
                         title="Support threshold vs association rules"),
-                use_container_width=True)
+                width="stretch")
             st.download_button(
                 "Download threshold results",
                 result.to_csv(index=False).encode("utf-8"),
                 "threshold_experiment.csv", "text/csv",
             )
-
-
-# -------------------------------------------------------
-# PAGE: HISTORICAL BUG SEARCH
-# -------------------------------------------------------
-elif page == "Historical Bug Search":
-    st.markdown('<div class="mini-label">06 / TEXT RETRIEVAL</div>',
-                unsafe_allow_html=True)
-    st.title("Historical Bug Search")
-    st.write("Search historical bug descriptions using TF-IDF similarity. "
-             "This is a separate text-retrieval feature, not Apriori.")
-
-    path = find_dataset()
-    if not path:
-        st.error("Dataset not found.")
-    else:
-        df = load_dataset(path, Path(path).stat().st_mtime)
-        query = st.text_area(
-            "Describe the error or paste a traceback",
-            placeholder="KeyError when accessing a missing column in pandas",
-            height=100,
-        )
-        top_k = st.slider("Number of results", 3, 15, 5)
-
-        if st.button("Search historical bugs", type="primary"):
-            with st.spinner("Building search index and finding similar records..."):
-                engine = BugSearch(df)
-                results = engine.search(query, top_k=top_k)
-
-            if results.empty:
-                st.warning("No textually similar historical records found. "
-                           "Try adding more detail.")
-            else:
-                display = results.copy()
-                display["similarity_score"] = display["similarity_score"].map(
-                    lambda x: f"{x:.1%}")
-                st.dataframe(display, use_container_width=True, hide_index=True)
-                st.caption("Similarity is textual similarity, not probability "
-                           "that a record has the same root cause.")
 
 
 # -------------------------------------------------------
@@ -764,8 +657,7 @@ elif page == "Algorithm Comparison":
     st.markdown('<div class="mini-label">07 / BENCHMARKS</div>',
                 unsafe_allow_html=True)
     st.title("Algorithm Comparison")
-    st.write("Compare your from-scratch Apriori with library Apriori and "
-             "FP-Growth on identical transactions.")
+    st.write("Compare the from-scratch Apriori implementation with the library Apriori implementation using identical transactions and settings.")
 
     source = st.selectbox("Transaction source",
                           ["Full PyResBugs dataset", "Manual transactions"],
@@ -782,21 +674,19 @@ elif page == "Algorithm Comparison":
                  disabled=len(transactions) < 2):
         with st.spinner("Running benchmarks..."):
             comparison = compare_algorithms(transactions, support, max_len)
-        st.dataframe(comparison, use_container_width=True, hide_index=True)
+        st.dataframe(comparison, width="stretch", hide_index=True)
 
         if comparison["Time (ms)"].notna().any():
             st.plotly_chart(
                 px.bar(comparison.dropna(subset=["Time (ms)"]),
                        x="Algorithm", y="Time (ms)", color="Algorithm",
                        title="Runtime comparison"),
-                use_container_width=True,
+                width="stretch",
             )
-        if (comparison["Frequent itemsets"].notna().all()
-                and comparison["Frequent itemsets"].nunique() > 1):
-            st.warning("The algorithms returned different itemset counts. "
-                       "Check thresholds, preprocessing and maximum length.")
-        else:
-            st.success("Itemset counts agree across displayed algorithms.")
+        if comparison["Frequent itemsets"].notna().all() and comparison["Frequent itemsets"].nunique() == 1:
+            st.success("Both implementations returned the same number of frequent itemsets.")
+        elif comparison["Frequent itemsets"].notna().all():
+            st.warning("The itemset counts differ. Check preprocessing and the implementation settings.")
         st.caption("Timings vary by machine and run.")
 
 
@@ -821,7 +711,7 @@ elif page == "Dataset Statistics":
             "Non-missing values": [int(df[c].notna().sum()) for c in df.columns],
             "Unique values": [int(df[c].nunique(dropna=True)) for c in df.columns],
             "Data type": [str(df[c].dtype) for c in df.columns],
-        }), use_container_width=True, hide_index=True)
+        }), width="stretch", hide_index=True)
 
         candidates = [c for c in df.columns if df[c].nunique(dropna=True) <= 100]
         chosen = st.selectbox("Inspect categorical distribution",
@@ -832,9 +722,9 @@ elif page == "Dataset Statistics":
         st.plotly_chart(
             px.bar(counts, x="Count", y=chosen, orientation="h",
                    title=f"Top values in {chosen}"),
-            use_container_width=True,
+            width="stretch",
         )
-        st.dataframe(counts, use_container_width=True, hide_index=True)
+        st.dataframe(counts, width="stretch", hide_index=True)
 
 
 # -------------------------------------------------------
