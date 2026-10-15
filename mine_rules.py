@@ -5,11 +5,9 @@ from mlxtend.frequent_patterns import apriori, association_rules
 
 from preprocess import load_and_preprocess
 
-
 # Mining thresholds
 MIN_SUPPORT = 0.01
 MIN_CONFIDENCE = 0.50
-
 
 def mine_association_rules():
     # Step 1: Load and preprocess the dataset
